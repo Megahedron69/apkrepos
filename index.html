@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Code Snippets & Folder Structure</title>
+    <style>
+      /* 🌙 Dark Mode Default */
+      :root {
+        --bg-color: #0e1117;
+        --card-color: #161b22;
+        --text-color: #e6edf3;
+        --accent: #3b82f6;
+        --border-color: #30363d;
+        --shadow: rgba(0, 0, 0, 0.3);
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        margin: 0;
+        padding: 40px 20px;
+        max-width: 900px;
+        margin-inline: auto;
+        line-height: 1.6;
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 40px;
+        color: #f0f6fc;
+        font-size: 1.9rem;
+        letter-spacing: 0.5px;
+      }
+
+      .accordion {
+        background-color: var(--card-color);
+        border-radius: 14px;
+        margin-bottom: 18px;
+        border: 1px solid var(--border-color);
+        box-shadow: 0 4px 14px var(--shadow);
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+      }
+
+      .accordion:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+      }
+
+      .accordion-header {
+        cursor: pointer;
+        padding: 18px 22px;
+        font-weight: 600;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: background-color 0.25s, color 0.25s;
+        color: #e2e8f0;
+      }
+
+      .accordion-header:hover {
+        background-color: #1f2937;
+        color: var(--accent);
+      }
+
+      .accordion-header::after {
+        content: "＋";
+        font-size: 22px;
+        transition: transform 0.25s ease;
+      }
+
+      .accordion-header.active::after {
+        content: "−";
+        transform: rotate(180deg);
+      }
+
+      .accordion-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s cubic-bezier(0.45, 0.05, 0.55, 0.95),
+          padding 0.3s ease;
+        padding: 0 22px;
+        opacity: 0;
+      }
+
+      .accordion-content.open {
+        padding: 20px 22px 26px;
+        opacity: 1;
+      }
+
+      .accordion-content pre {
+        background-color: #0d1117;
+        color: #d1d5db;
+        padding: 14px;
+        border-radius: 10px;
+        overflow-x: auto;
+        font-family: "Fira Code", monospace;
+        font-size: 0.9rem;
+        border: 1px solid #30363d;
+      }
+
+      a.section-link {
+        display: block;
+        font-size: 13px;
+        color: var(--accent);
+        text-decoration: none;
+        margin-bottom: 10px;
+      }
+
+      a.section-link:hover {
+        text-decoration: underline;
+      }
+
+      ol,
+      ul {
+        margin: 8px 0 12px 20px;
+      }
+
+      li {
+        margin-bottom: 8px;
+      }
+
+      strong {
+        color: #f9fafb;
+      }
+
+      img {
+        display: block;
+        margin: 20px auto;
+        border-radius: 12px;
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.4);
+        max-width: 100%;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      img:hover {
+        transform: scale(1.02);
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
+      }
+
+      code {
+        background: #1e293b;
+        color: #93c5fd;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 0.9em;
+      }
+
+      pre code {
+        background: none;
+        color: inherit;
+        padding: 0;
+      }
+
+      h3,
+      h4 {
+        color: #f3f4f6;
+        margin-top: 12px;
+      }
+
+      p {
+        color: #d1d5db;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Code Snippets & Project Documentation</h1>
+
+    <!-- Folder Structure -->
+    <section id="folder-structure" class="accordion">
+      <div class="accordion-header">1. Folder Structure</div>
+      <div class="accordion-content">
+        <a class="section-link" href="#folder-structure"
+          ># Link to this section</a
+        >
+        <pre
+          style="
+            background: #0d1117;
+            color: #c9d1d9;
+            padding: 14px;
+            border-radius: 10px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            border: 1px solid #30363d;
+          "
+        >
+
+📁 <b>App Folder Structure Overview</b>
+──────────────────────────────────────────────
+🧩 <b>Architecture Used:</b> React Native + Zustand + Service/Controller Pattern  
+🎯 <b>Principle:</b> Separation of Concerns — Components (UI), Hooks (Logic), Services (Network), Stores (State)
+
+──────────────────────────────────────────────
+📁 <b>app/</b>
+│
+├── 📁 <b>Components/</b>           → All reusable UI components grouped by screen
+│    ├── 📁 AuthComponents/          → Login/Signup UI elements
+│    ├── 📁 ChatScreenComponents/    → Chat UI elements like bubbles, waveform, typewriter
+│    ├── 📁 Common/                  → Shared UI elements across the app (buttons, modals, avatars)
+│    ├── 📁 HomeScreenComponents/    → Widgets for Home screen
+│    ├── 📁 ProfileScreenComponents/ → Profile stats, achievements, user info boxes
+│    ├── 📁 QuizComponents/          → Timer, quiz content, XP slider
+│    └── 📁 StoreComponents/         → Store tiles and subscription UI
+│
+├── 📁 <b>config/</b>                → Environment & SDK initialization (Firebase, Google, MMKV)
+│
+├── 📁 <b>Constants/</b>             → Centralized constants (colors, assets, mappings)
+│
+├── 📁 <b>Controllers/</b>           → Business logic between UI and services (e.g. quiz.controller.ts)
+│
+├── 📁 <b>Hooks/</b>                 → All custom hooks for reusable logic
+│    │  e.g. useWebsocket, useGameAudio, useNetworkStatus
+│
+├── 📁 <b>Routes/</b>                → Navigation stacks and tab route configurations
+│
+├── 📁 <b>Screens/</b>               → Full screen-level components composing UI + logic
+│
+├── 📁 <b>Services/</b>              → API / Network / SDK integration layer
+│    │  e.g. websocket.service.ts, achievement.service.ts
+│
+├── 📁 <b>Stores/</b>                → Zustand stores for global state management (persistent + volatile)
+│
+├── 📁 <b>Styles/</b>                → Global style definitions (colors, layout constants)
+│
+├── 📁 <b>Types/</b>                 → TypeScript type definitions
+│
+└── 📁 <b>Utils/</b>                 → Helper utilities (date formatting, random, UUID, reset store, etc.)
+
+──────────────────────────────────────────────
+🗂️ <b>Example:</b>  
+`useWebsocket.ts` → Custom hook managing socket lifecycle  
+`websocket.service.ts` → Singleton service handling socket connection logic  
+`useChatStore.ts` → Zustand store syncing socket data with chat UI  
+──────────────────────────────────────────────
+
+        </pre>
+      </div>
+    </section>
+
+    <!-- Production Issue -->
+    <section id="production-issue" class="accordion">
+      <div class="accordion-header">
+        2. Critical Production Issue: WebSocket Instance Explosion
+      </div>
+      <div class="accordion-content">
+        <a class="section-link" href="#production-issue"
+          ># Link to this section</a
+        >
+        <h3>
+          Critical Production Issue: Multiple WebSocket Instances & Session
+          Conflicts
+        </h3>
+        <ul>
+          <li>
+            <strong>Issue Summary:</strong> In production, the chat feature was
+            spawning multiple WebSocket connections each time the screen
+            re-rendered. Incorrect session IDs caused overlapping connections
+            across personalities.
+          </li>
+        </ul>
+        <ul>
+          <li><strong>Symptoms:</strong></li>
+          <ul>
+            <li>
+              Server crashing due to ~160 simultaneous WebSocket instances per
+              device
+            </li>
+            <li>Severe battery drain & performance lag</li>
+            <li>Users receiving messages from wrong sessions</li>
+          </ul>
+        </ul>
+        <ul>
+          <li><strong>Debugging Process:</strong></li>
+          <ul>
+            <li>Added a global WebSocket counter to monitor instances</li>
+            <li>
+              Used <code>adb logcat</code> & React Native JS thread profiling in
+              staging
+            </li>
+            <li>
+              Traced redundant socket creation through
+              <code>useEffect</code> and <code>useFocusEffect</code>
+            </li>
+          </ul>
+        </ul>
+        <ul>
+          <li><strong>Solution Implemented:</strong></li>
+          <ul>
+            <li>
+              Created a <strong>Singleton WebSocket Service</strong> to maintain
+              one connection per session
+            </li>
+            <li>
+              Used <code>useEffect</code> + <code>useFocusEffect</code> to
+              open/close sockets based on screen lifecycle
+            </li>
+            <li>
+              Integrated <strong>Zustand with persist</strong> to manage and
+              restore correct session IDs
+            </li>
+            <li>Added heartbeat pings & reconnection logic for stability</li>
+          </ul>
+        </ul>
+        <pre>
+ [Before Fix] 
+ [WebSocket] Connected (instance count: 5) 
+ [WebSocket] Connected (instance count: 45) 
+ ⚠️ Server pool limit exceeded. 
+ 
+ [After Fix] 
+[WebSocket] Singleton instance active (sessionId: 7gfd3k) 
+ [WebSocket] Closed gracefully on screen blur 
+ </pre
+        >
+        <ul>
+          <li><strong>Impact:</strong></li>
+          <ul>
+            <li>Reduced socket instances from ~160 ➜ 1 per user</li>
+            <li>Server stability improved by ~80%</li>
+            <li>Battery drain significantly reduced</li>
+            <li>Chat reliability improved across all devices</li>
+          </ul>
+        </ul>
+        <p>
+          <strong>Commit Reference:</strong> <code>a7b1f34</code> —
+          <em
+            >fix: implement singleton websocket service and proper lifecycle
+            cleanup</em
+          >
+        </p>
+      </div>
+    </section>
+
+    <!-- APK Size Reduction -->
+    <section id="apk-size-reduction" class="accordion">
+      <div class="accordion-header">3. Reducing React Native APK Size</div>
+      <div class="accordion-content">
+        <a class="section-link" href="#apk-size-reduction"
+          ># Link to this section</a
+        >
+
+        <h3>Optimizing APK Size for Production</h3>
+        <ol>
+          <li>
+            <strong>Enable Hermes Engine</strong> — smaller JS bundle and faster
+            startup.
+          </li>
+          <li>
+            <strong>Split APK by Architecture</strong> — only serves required
+            binaries to each device.
+          </li>
+          <li>
+            <strong>Enable Proguard + ShrinkResources</strong> — removes unused
+            code and assets.
+          </li>
+          <li>
+            <strong>Convert Images to WebP</strong> — lightweight optimized
+            assets.
+          </li>
+          <li>
+            <strong>Use Android App Bundles (.aab)</strong> — Play Store dynamic
+            delivery.
+          </li>
+        </ol>
+
+        <p>
+          These steps reduced the APK size by <strong>~60%</strong>, improving
+          install time and app performance.
+        </p>
+
+        <h4>APK Size Comparison</h4>
+        <img src="image.png" alt="APK Size Comparison Graph" />
+        <pre>
+Before Optimization: 234 MB (Universal APK)
+After Optimization: 66.8 MB (Split APK + Hermes + ShrinkResources)
+        </pre>
+      </div>
+    </section>
+
+    <script>
+      const headers = document.querySelectorAll(".accordion-header");
+      headers.forEach((header) => {
+        header.addEventListener("click", () => {
+          header.classList.toggle("active");
+          const content = header.nextElementSibling;
+          if (content.style.maxHeight) {
+            content.style.maxHeight = null;
+            content.classList.remove("open");
+          } else {
+            content.style.maxHeight = content.scrollHeight + "px";
+            content.classList.add("open");
+          }
+        });
+      });
+      window.addEventListener("DOMContentLoaded", () => {
+        const hash = window.location.hash;
+        if (hash) {
+          const targetSection = document.querySelector(hash);
+          if (targetSection && targetSection.classList.contains("accordion")) {
+            // Close all open accordions
+            document.querySelectorAll(".accordion-content").forEach((c) => {
+              c.style.maxHeight = null;
+              c.classList.remove("open");
+              c.previousElementSibling.classList.remove("active");
+            });
+
+            // Open the target accordion
+            const header = targetSection.querySelector(".accordion-header");
+            const content = targetSection.querySelector(".accordion-content");
+            header.classList.add("active");
+            content.classList.add("open");
+            content.style.maxHeight = content.scrollHeight + "px";
+
+            // Smooth scroll into view
+            targetSection.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
